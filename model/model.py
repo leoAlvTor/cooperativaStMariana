@@ -11,14 +11,14 @@ Base = declarative_base()
 UsuarioTrabajo = Table('UsuarioTrabajo',
                        Base.metadata,
                        Column('id', Integer, primary_key=True),
-                       Column('usuarioId', Integer, ForeignKey('Usuario.id')),
+                       Column('usuarioId', String(10), ForeignKey('Usuario.id')),
                        Column('trabajoId', Integer, ForeignKey('Trabajo.id')))
 
 
 class Usuario(Base):
     __tablename__ = 'Usuario'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(String(10), primary_key=True)
     nombre = Column(String(250))
     apellido = Column(String(250))
     direccion = Column(String(250))
@@ -27,7 +27,8 @@ class Usuario(Base):
     rol = Column(String(250))
     password = Column(String(250))
 
-    def __init__(self, nombre, apellido, direccion, correo, password, rol='CLIENTE'):
+    def __init__(self, id, nombre, apellido, direccion, correo, password, rol='CLIENTE'):
+        self.id = id
         self.nombre = nombre
         self.apellido = apellido
         self.direccion = direccion
@@ -56,7 +57,7 @@ class DerechoAgua(Base):
     id = Column(Integer, Sequence('derecho_agua_id_seq'), primary_key=True)
     fechaAdquisicion = Column(Date)
     numeroDeMedidor = Column(String(250))
-    usuario_id = Column(Integer, ForeignKey('Usuario.id'))
+    usuario_id = Column(String(10), ForeignKey('Usuario.id'))
 
 
 class Lectura(Base):

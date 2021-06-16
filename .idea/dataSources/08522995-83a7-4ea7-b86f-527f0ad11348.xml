@@ -1331,7 +1331,7 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
     </column>
     <column id="357" parent="337" name="usuario_id">
       <Position>4</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>varchar(10)|0s</DataType>
     </column>
     <index id="358" parent="337" name="usuario_id">
       <ColNames>usuario_id</ColNames>
@@ -1589,9 +1589,8 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
     </column>
     <column id="410" parent="344" name="id">
       <Position>1</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>varchar(10)|0s</DataType>
       <NotNull>1</NotNull>
-      <SequenceIdentity>null</SequenceIdentity>
     </column>
     <column id="411" parent="344" name="nombre">
       <Position>2</Position>
@@ -1630,7 +1629,7 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
     </column>
     <column id="419" parent="345" name="usuarioId">
       <Position>2</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>varchar(10)|0s</DataType>
     </column>
     <column id="420" parent="345" name="trabajoId">
       <Position>3</Position>
