@@ -29,3 +29,8 @@ class Usuario_Get(BaseModel):
     direccion: str
     correo: str
 
+
+class Derecho_Create_API(BaseModel):
+    fecha_adquisicion: str
+    numero_medidor: str
+    usuario_id: str
