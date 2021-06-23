@@ -1,7 +1,9 @@
 import uvicorn
 from sqlalchemy.exc import MultipleResultsFound, NoResultFound
 
-from model.model import Base, Usuario, Trabajo
+from datetime import datetime
+
+from model.model import Base, Usuario, Trabajo, DerechoAgua
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -16,7 +18,7 @@ def create_session():
 
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from starlette.middleware.cors import CORSMiddleware
-from model.api_model import Usuario_API, Usuario_Login_API, Usuario_Get
+from model.api_model import Usuario_API, Usuario_Login_API, Usuario_Get, Derecho_Create_API
 
 app = FastAPI()
 
@@ -68,6 +70,23 @@ async def login(usuario: Usuario_Login_API):
 @app.post('/user/update')
 async def user_update(usuario: Usuario_Login_API):
 
+    ...
+
+
+@app.post('/derecho/create')
+async def derecho_create(derecho: Derecho_Create_API):
+    session = create_session()
+    try:
+        print(derecho.fecha_adquisicion)
+        derecho_agua = DerechoAgua(fechaAdquisicion=datetime.strptime(derecho.fecha_adquisicion, '%d/%m/%Y'), numeroMedidor=derecho.numero_medidor,
+                                   usuario_id=derecho.usuario_id)
+        session.add(derecho_agua)
+        session.commit()
+        session.close()
+        return {'Hola': 'Al parecer si se guardo bien ajio ajio'}
+    except Exception as e:
+        print(e)
+        print('ERRORRRRRRRRRRRRRR')
     ...
 
 
