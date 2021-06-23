@@ -37,7 +37,6 @@ class Usuario(Base):
         self.password = password
 
 
-
 class Trabajo(Base):
     __tablename__ = 'Trabajo'
 
@@ -58,6 +57,12 @@ class DerechoAgua(Base):
     fechaAdquisicion = Column(Date)
     numeroDeMedidor = Column(String(250))
     usuario_id = Column(String(10), ForeignKey('Usuario.id'))
+
+    def __init__(self, fechaAdquisicion, numeroMedidor, usuario_id):
+        self.id = None
+        self.fechaAdquisicion = fechaAdquisicion
+        self.numeroDeMedidor = numeroMedidor
+        self.usuario_id = usuario_id
 
 
 class Lectura(Base):
