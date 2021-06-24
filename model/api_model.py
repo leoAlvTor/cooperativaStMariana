@@ -34,3 +34,10 @@ class Derecho_Create_API(BaseModel):
     fecha_adquisicion: str
     numero_medidor: str
     usuario_id: str
+
+
+class Derecho_Get(BaseModel):
+    id: int
+    fecha: str
+    numero_medidor: str
+    usuario_id: str
