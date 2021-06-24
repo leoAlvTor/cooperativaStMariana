@@ -18,7 +18,7 @@ def create_session():
 
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from starlette.middleware.cors import CORSMiddleware
-from model.api_model import Usuario_API, Usuario_Login_API, Usuario_Get, Derecho_Create_API
+from model.api_model import Usuario_API, Usuario_Login_API, Usuario_Get, Derecho_Create_API, Derecho_Get
 
 app = FastAPI()
 
@@ -99,6 +99,20 @@ async def user_get():
         for rst in result:
             usuario = {'id': rst.id, 'nombre': rst.nombre, 'apellido': rst.apellido,
                              'direccion': rst.direccion, 'correo': rst.correo}
+            usuarios.append(usuario)
+        return usuarios
+    except Exception as e:
+        print(e)
+
+
+@app.get('/derecho/derechos', response_model=list[Derecho_Get])
+async def derecho_get():
+    session = create_session()
+    try:
+        result = session.query(DerechoAgua).all()
+        usuarios = []
+        for rst in result:
+            usuario = {'id': rst.id, 'fecha': str(rst.fechaAdquisicion), 'numero_medidor': rst.numeroDeMedidor, 'usuario_id': rst.usuario_id}
             usuarios.append(usuario)
         return usuarios
     except Exception as e:
