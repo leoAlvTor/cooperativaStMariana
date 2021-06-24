@@ -114,6 +114,23 @@ async def derecho_get():
         for rst in result:
             usuario = {'id': rst.id, 'fecha': str(rst.fechaAdquisicion), 'numero_medidor': rst.numeroDeMedidor, 'usuario_id': rst.usuario_id}
             usuarios.append(usuario)
+        session.close()
+        return usuarios
+    except Exception as e:
+        print(e)
+
+
+@app.get('/derecho/derechos/', response_model=list[Derecho_Get])
+async def derecho_get(cedula: str):
+    session = create_session()
+    try:
+        result = session.query(DerechoAgua).filter(DerechoAgua.usuario_id == cedula)
+        usuarios = []
+        for rst in result:
+            usuario = {'id': rst.id, 'fecha': str(rst.fechaAdquisicion), 'numero_medidor': rst.numeroDeMedidor,
+                       'usuario_id': rst.usuario_id}
+            usuarios.append(usuario)
+        session.close()
         return usuarios
     except Exception as e:
         print(e)
